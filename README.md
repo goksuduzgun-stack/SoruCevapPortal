@@ -4,7 +4,8 @@ Bu sürüm, proje yönergesindeki **Ara Sınav** iş paketleriyle sınırlıdır
 
 - SQL Server, Code First ve EF Core migration
 - Soru, cevap ve kategori modelleri
-- Repository deseni ve yönetici paneli
+- Hocanın Product örneğindeki gibi ayrı Repository, Controller ve MVC CRUD sayfaları
+- Yönetici paneli
 - Cookie tabanlı yönetici oturumu ve yetkilendirme
 - Soru/kategori yönetimi ve AJAX ile soru arama
 
@@ -25,5 +26,6 @@ Gereksinimler: Visual Studio 2022, .NET 8 SDK ve SQL Server LocalDB.
    İkinci komuttaki örnek şifreyi kendi belirlediğiniz bir şifreyle değiştirin.
 3. Projeyi çalıştırın. İlk açılışta migration'lar uygulanır ve örnek kategoriler eklenir.
 4. `/Account/Login` adresinden ayarladığınız yönetici bilgileriyle giriş yapın.
+5. Yönetim panelindeki **Sorular** sayfasında `Index`, `Add`, `Update` ve `Delete` işlemlerini deneyin. İşlemler, hocanın Product örneğindeki gibi controller ve ayrı bir repository üzerinden yürütülür; repository veriyi bu sürümde SQL Server/EF Core ile saklar.
 
 Veritabanı bağlantısı `appsettings.json` içindeki `DefaultConnection` ayarındadır. Gerçek parolaları kaynak koduna veya `appsettings.json` dosyasına yazmayın.

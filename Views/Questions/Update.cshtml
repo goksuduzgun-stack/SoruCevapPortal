@@ -1,0 +1,16 @@
+@model SoruCevapPortal.Models.Question
+@{
+    ViewData["Title"] = "Soruyu Düzenle";
+}
+<h1 class="h2 mb-4">Soruyu Düzenle</h1>
+<div class="card">
+    <div class="card-body p-4">
+        <form asp-action="Update" asp-route-id="@Model.Id" method="post">
+            @Html.AntiForgeryToken()
+            <partial name="_QuestionForm" model="Model" />
+            <button type="submit" class="btn btn-primary">Güncelle</button>
+            <a asp-action="Index" class="btn btn-outline-secondary">Vazgeç</a>
+        </form>
+    </div>
+</div>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

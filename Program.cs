@@ -25,6 +25,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 });
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddScoped<QuestionRepository>();
 
 var app = builder.Build();
 

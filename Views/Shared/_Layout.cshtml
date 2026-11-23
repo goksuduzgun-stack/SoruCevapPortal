@@ -17,7 +17,7 @@
                 {
                     <div class="d-flex align-items-center gap-3">
                         <a class="nav-link" asp-controller="Admin" asp-action="Index">Yönetim Paneli</a>
-                        <a class="nav-link" asp-controller="Admin" asp-action="Questions">Sorular</a>
+                        <a class="nav-link" asp-controller="Questions" asp-action="Index">Sorular</a>
                         <a class="nav-link" asp-controller="Admin" asp-action="Categories">Kategoriler</a>
                         <form asp-controller="Account" asp-action="Logout" method="post">
                             @Html.AntiForgeryToken()

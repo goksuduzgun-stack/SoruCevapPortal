@@ -25,7 +25,6 @@ if (filterForm && searchInput && categoryInput && questionRows && emptyQuestions
         const cell = document.createElement("td");
         cell.textContent = text;
         row.appendChild(cell);
-        return cell;
     };
 
     const searchQuestions = async () => {
@@ -34,8 +33,9 @@ if (filterForm && searchInput && categoryInput && questionRows && emptyQuestions
         if (categoryInput.value) query.set("categoryId", categoryInput.value);
 
         try {
-            const response = await fetch(`/Admin/SearchQuestions?${query.toString()}`);
+            const response = await fetch(`/Questions/Search?${query.toString()}`);
             if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
             const items = await response.json();
             questionRows.replaceChildren();
 
@@ -43,19 +43,20 @@ if (filterForm && searchInput && categoryInput && questionRows && emptyQuestions
                 const row = document.createElement("tr");
                 addCell(row, item.title);
                 addCell(row, item.categoryName);
+                addCell(row, item.answerCount.toString());
                 addCell(row, new Date(item.createdAt).toLocaleString("tr-TR"));
 
                 const actions = document.createElement("td");
                 actions.className = "text-end text-nowrap";
-                const edit = document.createElement("a");
-                edit.className = "btn btn-sm btn-outline-primary me-1";
-                edit.href = `/Admin/EditQuestion/${encodeURIComponent(item.id)}`;
-                edit.textContent = "Düzenle";
+                const update = document.createElement("a");
+                update.className = "btn btn-sm btn-outline-primary me-1";
+                update.href = `/Questions/Update/${encodeURIComponent(item.id)}`;
+                update.textContent = "Düzenle";
                 const remove = document.createElement("a");
                 remove.className = "btn btn-sm btn-outline-danger";
-                remove.href = `/Admin/DeleteQuestion/${encodeURIComponent(item.id)}`;
+                remove.href = `/Questions/Delete/${encodeURIComponent(item.id)}`;
                 remove.textContent = "Sil";
-                actions.append(edit, remove);
+                actions.append(update, remove);
                 row.appendChild(actions);
                 questionRows.appendChild(row);
             }

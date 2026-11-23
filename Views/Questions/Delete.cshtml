@@ -1,0 +1,18 @@
+@model SoruCevapPortal.Models.Question
+@{
+    ViewData["Title"] = "Soruyu Sil";
+}
+<div class="card border-danger">
+    <div class="card-body p-4">
+        <h1 class="h4 text-danger">Soruyu silmek istiyor musunuz?</h1>
+        <p class="fw-semibold">@Model.Title</p>
+        <p class="text-muted">@Model.Category?.Name · @Model.CreatedAt.ToLocalTime().ToString("dd.MM.yyyy HH:mm")</p>
+        <p>Bu işlem bu soruya bağlı @Model.Answers.Count cevabı da siler.</p>
+        <form asp-action="DeleteConfirmed" method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="id" value="@Model.Id" />
+            <button class="btn btn-danger">Evet, Sil</button>
+            <a asp-action="Index" class="btn btn-outline-secondary">Vazgeç</a>
+        </form>
+    </div>
+</div>
