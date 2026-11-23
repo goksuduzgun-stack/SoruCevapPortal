@@ -1,0 +1,50 @@
+@model SoruCevapPortal.ViewModels.AdminCategoryManagementViewModel
+@{
+    ViewData["Title"] = "Kategorileri Yönet";
+}
+<h1 class="h2 mb-4">Kategorileri Yönet</h1>
+@if (TempData["StatusMessage"] is string message)
+{
+    <div class="alert alert-success">@message</div>
+}
+@if (TempData["ErrorMessage"] is string error)
+{
+    <div class="alert alert-danger">@error</div>
+}
+<div class="card mb-4">
+    <div class="card-body">
+        <form asp-action="AddCategory" method="post" class="row g-2 align-items-end">
+            @Html.AntiForgeryToken()
+            <div class="col-md-9">
+                <label asp-for="NewCategoryName" class="form-label"></label>
+                <input asp-for="NewCategoryName" class="form-control" />
+                <span asp-validation-for="NewCategoryName" class="text-danger"></span>
+            </div>
+            <div class="col-md-3"><button class="btn btn-primary w-100">Kategori Ekle</button></div>
+        </form>
+    </div>
+</div>
+<div class="card">
+    <div class="table-responsive">
+        <table class="table align-middle mb-0">
+            <thead><tr><th>Kategori adı</th><th>Soru sayısı</th><th></th></tr></thead>
+            <tbody>
+            @foreach (var category in Model.Categories)
+            {
+                <tr>
+                    <td>@category.Name</td>
+                    <td>@category.QuestionCount</td>
+                    <td class="text-end">
+                        <form asp-action="DeleteCategory" method="post">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@category.Id" />
+                            <button class="btn btn-sm btn-outline-danger" disabled="@(category.QuestionCount > 0)">Sil</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

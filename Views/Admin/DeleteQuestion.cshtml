@@ -1,0 +1,18 @@
+@model SoruCevapPortal.ViewModels.AdminQuestionItemViewModel
+@{
+    ViewData["Title"] = "Soruyu Sil";
+}
+<div class="card border-danger">
+    <div class="card-body p-4">
+        <h1 class="h4 text-danger">Soruyu silmek istiyor musunuz?</h1>
+        <p><strong>@Model.Title</strong></p>
+        <p class="text-muted">@Model.CategoryName · @Model.CreatedAt.ToLocalTime().ToString("dd.MM.yyyy HH:mm")</p>
+        <p>Bu işlem soruya bağlı cevapları da silecektir.</p>
+        <form asp-action="ConfirmDeleteQuestion" method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="id" value="@Model.Id" />
+            <button class="btn btn-danger">Evet, Sil</button>
+            <a asp-action="Questions" class="btn btn-outline-secondary">Vazgeç</a>
+        </form>
+    </div>
+</div>
